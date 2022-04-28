@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   const studentsData = [
     { id: 1, name: "Sameer", username: "sameersahu", score: "987" },
     { id: 2, name: "Sumit", username: "sumitpanda", score: "852" },
@@ -14,9 +16,9 @@ const Home = () => {
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <h1>All Student List</h1>
-      <button>Add student</button>
+      <button onClick={() => navigate("/add")}>Add student</button>
       <div className="table-list">
         <table cellPadding="5" cellSpacing="5">
           <thead>
@@ -35,7 +37,7 @@ const Home = () => {
                   <td>{each.username}</td>
                   <td>{each.score}</td>
                   <td>
-                    <button>Edit</button>
+                    <button onClick={() => navigate("/edit")}>Edit</button>
                     <button onClick={() => deleteStudent(each.id)}>
                       Delete
                     </button>
