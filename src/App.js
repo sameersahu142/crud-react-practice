@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Add from "./components/Add";
-import Edit from "./components/Edit";
+import Home from "./components/HomePage";
+import Add from "./components/AddPage";
+import Edit from "./components/EditPage";
 
 function App() {
   return (
