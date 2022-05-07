@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ studentList, deleteStudent }) => {
   let navigate = useNavigate();
-  const studentsData = [
-    { id: 1, name: "Sameer", username: "sameersahu", score: "987" },
-    { id: 2, name: "Sumit", username: "sumitpanda", score: "852" },
-    { id: 3, name: "Pritish", username: "pritishsamal", score: "212" },
-  ];
-
-  const [studentList, setStudentList] = useState(studentsData);
-
-  const deleteStudent = (id) => {
-    setStudentList(studentList.filter((each) => each.id !== id));
-  };
 
   return (
     <div className="container">
@@ -46,7 +35,7 @@ const Home = () => {
               ))
             ) : (
               <tr>
-                <td colspan={5}>No users</td>
+                <td colspan={5}>No students</td>
               </tr>
             )}
           </tbody>
