@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import Home from "./components/HomePage";
@@ -7,6 +7,8 @@ import Add from "./components/AddPage";
 import Edit from "./components/EditPage";
 
 function App() {
+  let navigate = useNavigate();
+
   const studentsData = [
     { id: 1, name: "Sameer", username: "sameersahu", score: "987" },
     { id: 2, name: "Sumit", username: "sumitpanda", score: "852" },
@@ -24,19 +26,31 @@ function App() {
     setStudentList([...studentList, student]);
   };
 
+  const initialFormState = { id: null, name: "", username: "", score: "" };
+  const [currentStudent, setCurrentStudent] = useState(initialFormState);
+
+  const editRow = student => {
+    setCurrentStudent({ id: student.id, name: student.name, username: student.username, score: student.score });
+    navigate("/edit");
+  }
+
+  const updateStudent = (id, updateStudent) => {
+    setStudentList(studentList.map(student => (student.id === id ? updateStudent : student)));
+  }
+
   return (
-    <Router>
+    <div>
       <Routes>
         <Route
           path="/"
           element={
-            <Home studentList={studentList} deleteStudent={deleteStudent} />
+            <Home studentList={studentList} deleteStudent={deleteStudent} editRow={editRow} />
           }
         />
         <Route path="/add" element={<Add addStudent={addStudent} />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit" element={<Edit currentStudent={currentStudent} updateStudent={updateStudent} />} />
       </Routes>
-    </Router>
+    </div>
   );
 }
 

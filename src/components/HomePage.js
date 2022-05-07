@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ studentList, deleteStudent }) => {
+const Home = ({ studentList, deleteStudent, editRow }) => {
   let navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ const Home = ({ studentList, deleteStudent }) => {
                   <td>{each.username}</td>
                   <td>{each.score}</td>
                   <td>
-                    <button onClick={() => navigate("/edit")}>Edit</button>
+                    <button onClick={() => editRow(each)}>Edit</button>
                     <button onClick={() => deleteStudent(each.id)}>
                       Delete
                     </button>
